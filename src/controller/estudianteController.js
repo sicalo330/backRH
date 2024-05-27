@@ -20,3 +20,19 @@ export const createStudent = async(req, res) => {
     const result = await client.query(`INSERT INTO estudiantes(nombre, edad) values ('${nombre}',${edad})`);
     res.json(result)
 }
+
+export const updateStudent = async(req,res) => {
+    const { id, nombre, edad } = req.body
+    const result = await client.query(`UPDATE estudiantes set nombre = '${nombre}', edad = '${edad}' where id = ${id}`)
+    res.json(result)
+}
+
+export const deleteStudent = async(req, res) => {
+    try{
+        const { id } = req.body
+        const result = await client.query(`DELETE FROM estudiantes WHERE id = ${id}`)
+        res.json(result)
+    }catch(err){
+        console.log(err)
+    }
+}
