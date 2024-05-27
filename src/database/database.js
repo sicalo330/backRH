@@ -1,6 +1,6 @@
 const { Client } = require('pg')
 
-const client = new Client({
+export const client = new Client({
     user:"postgres",
     host:"localhost",
     database:"prueba",
@@ -17,7 +17,7 @@ export const connectToDatabase = async () => {
     }
 };
 
-export const getEstudiantes = async (req, res) => {
+export const getStudents = async (req, res) => {
     try {
         const result = await client.query('SELECT * FROM estudiantes');
         console.log(result)

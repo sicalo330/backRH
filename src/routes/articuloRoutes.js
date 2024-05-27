@@ -1,9 +1,9 @@
 import { Router } from "express";
-import { conexion, estudiantes } from "../controller/estudianteController";
+import { createStudent, getStudents } from "../controller/estudianteController";
 
 const router = Router()
 
-router.get('/conexion', conexion)
-router.get('/estudiantes', estudiantes);
+router.get('/getStudents', getStudents);
+router.post('/createStudent', createStudent);
 
 export  default router
