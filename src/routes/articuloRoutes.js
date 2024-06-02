@@ -3,9 +3,10 @@ import { createStudent, deleteStudent, getStudents, updateStudent } from "../con
 
 const router = Router()
 
-router.get('/getStudents', getStudents);
-router.post('/createStudent', createStudent);
+
+router.get('/getStudents',  getStudents);
+router.post('/createStudent',createStudent);
 router.put('/updateStudent', updateStudent);
-router.delete('/deleteStudent', deleteStudent)
+router.delete('/deleteStudent',deleteStudent)
 
 export  default router

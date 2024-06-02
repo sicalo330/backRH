@@ -6,8 +6,13 @@ const app = express()
 
 app.set('port', 4041)
 
-app.use(cors())
+let corsOptions = {
+  origin: 'http://localhost:4200/',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
 
+app.use(cors())
+  
 app.use(express.json())
 app.use(express.urlencoded({extended:false}))
 
