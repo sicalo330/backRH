@@ -327,6 +327,20 @@ Toma el método planteado anteriormente, para agregarlo en el archivo del contro
 Para compilar el código es necesario agregar la línea al package json, **Nota: la terminal debe estar dentro de la raíz para que le comando se ejecute bien**
 Posteriormente agregar el comando **npm run dev**
 
+# **Como correr el contenedor back**
+
+**Para ello es necesario tener docker y nodejs instalado, posteriormente hay que tener el archivo docker-compose o simplemete tener el contenedor, para que docker-compose funcione correctamente es necesario instalarlo primero**
+
+# Istalar dependencias con los siguientes comandos
+- DOCKER_CONFIG=${DOCKER_CONFIG:-$HOME/.docker}
+- mkdir -p $DOCKER_CONFIG/cli-plugins
+- curl -SL https://github.com/docker/compose/releases/download/v2.27.0/docker-compose-linux-x86_64 -o $DOCKER_CONFIG/cli-plugins/docker-compose
+# Aplicar y ejecutar los permisos
+- chmod +x $DOCKER_CONFIG/cli-plugins/docker-compose
+# Ensayar la instalación ejecutando: docker compose version
+-Por ultimo para correr tanto nodejs como la base de datos en postgresql es necesario usar el comando: docker-compose up
+
+
 
 # **Referencias**
 
