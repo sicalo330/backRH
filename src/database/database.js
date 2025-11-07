@@ -1,32 +1,16 @@
-import { Client } from 'pg';
-import dotenv from 'dotenv';
+const sqlite3 = require('sqlite3').verbose();
 
-dotenv.config();
-
-export  const client = new Client({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  database: process.env.DB_NAME,
-  password: process.env.DB_PASSWORD,
-  port: process.env.DB_PORT,
+// Crear / conectar base de datos
+const db = new sqlite3.Database('./database.db', (err) => {
+  if (err) {
+    console.error('Error al conectar con la base de datos:', err.message);
+  } else {
+    console.log('Conectado a la base de datos SQLite.');
+  }
 });
 
-console.log(process.env.DB_HOST,
-    process.env.DB_USER,
-    process.env.DB_NAME,
-     process.env.DB_PASSWORD,
-    process.env.DB_PORT,)
+// Crear tablas si no existen
+// db.run(`DELETE FROM movies where id=1`);
+// db.run(`DROP TABLE users`);
 
-
-// Conectar una sola vez al iniciar la aplicación
-export const connectToDatabase = async () => {
-  try {
-    await client.connect();
-    console.log("Connected to database!");
-  } catch (err) {
-    console.error("Error connecting to database:", err.message);
-  }
-};
-
-
-export default client;
+module.exports = db;
