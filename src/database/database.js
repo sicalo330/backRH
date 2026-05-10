@@ -21,7 +21,10 @@ db.serialize(() => {
   //     puntaje INTEGER,
   //     estado TEXT,
   //     salario INTEGER,
-  //     ajuste INTEGER
+  //     ajuste INTEGER,
+  //     eps TEXT,
+  //     arl TEXT,
+  //     caja TEXT
   //   )
   // `);
 
