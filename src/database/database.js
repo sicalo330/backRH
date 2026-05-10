@@ -1,6 +1,5 @@
 const sqlite3 = require('sqlite3').verbose();
 
-// Crear / conectar base de datos
 const db = new sqlite3.Database('./database.db', (err) => {
   if (err) {
     console.error('Error al conectar con la base de datos:', err.message);
@@ -9,14 +8,55 @@ const db = new sqlite3.Database('./database.db', (err) => {
   }
 });
 
-// db.prepare(`
-//     DELETE FROM candidatos WHERE id = 2`
-//   ).run();
+db.serialize(() => {
 
-// console.log('Tabla creadas');
+  // // Crear nueva tabla con salario y ajuste
+  // db.run(`
+  //   CREATE TABLE IF NOT EXISTS candidatos (
+  //     id INTEGER PRIMARY KEY AUTOINCREMENT,
+  //     nombre TEXT,
+  //     correo TEXT,
+  //     cargo TEXT,
+  //     experiencia INTEGER,
+  //     puntaje INTEGER,
+  //     estado TEXT,
+  //     salario INTEGER,
+  //     ajuste INTEGER
+  //   )
+  // `);
 
-// Crear tablas si no existen
-// db.run(`DELETE FROM movies where id=1`);
-// db.run(`DROP TABLE users`);
+  // // Copiar datos antiguos
+  // db.run(`
+  //   INSERT INTO candidatos_new
+  //   (
+  //     id,
+  //     nombre,
+  //     correo,
+  //     cargo,
+  //     experiencia,
+  //     puntaje,
+  //     estado
+  //   )
+  //   SELECT
+  //     id,
+  //     nombre,
+  //     correo,
+  //     cargo,
+  //     experiencia,
+  //     puntaje,
+  //     estado
+  //   FROM candidatos
+  // `);
+
+  // Eliminar tabla vieja
+  // db.run(`DROP TABLE candidatos`);
+
+  // // Renombrar tabla nueva
+  // db.run(`
+  //   ALTER TABLE candidatos_new
+  //   RENAME TO candidatos
+  // `);
+
+});
 
 module.exports = db;

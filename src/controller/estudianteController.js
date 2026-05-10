@@ -55,8 +55,8 @@ export const deleteCandidate = async(req, res) => {
 
 
 export const createCandidate = async(req, res) => {
-    const { nombre, correo, cargo, experiencia, puntaje, estado} = req.body;
-    await db.run('INSERT INTO candidatos (nombre, correo,cargo,experiencia,puntaje,estado) VALUES (?, ?, ?, ?, ?, ?)', [nombre, correo,cargo,experiencia,puntaje,estado]);
+    const { nombre, correo, cargo, experiencia, puntaje, estado, salario, ajuste} = req.body;
+    await db.run('INSERT INTO candidatos (nombre, correo,cargo,experiencia,puntaje,estado,salario,ajuste) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', [nombre, correo,cargo,experiencia,puntaje,estado,salario,ajuste]);
     res.json({ message: 'Usuario creado exitosamente' });
 }
 
