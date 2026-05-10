@@ -19,6 +19,23 @@ export const getCandidate = (req, res) => {
   });
 };
 
+export const updateStudent = (req,res) => {
+  const { id } = req.body
+  const {body} = req.body
+
+  const sql = `UPDATE candidatos SET nombre = ?, correo = ?, cargo = ?, experiencia = ?, puntaje = ?, estado = ? WHERE id = ?`
+
+    db.run(sql,[body.nombre,body.correo,body.cargo,body.experiencia,body.puntaje,body.estado,id],
+        function(error){
+            if(error){
+                console.log(error)
+                res.status(500).json({message: "Error actualizando candidato"})
+            }else{
+                res.json({message: "Candidato actualizado correctamente"})
+            }
+        })
+}
+
 export const getStudents = (req, res) => {
   res.json("conexion a getStudents")
 };
@@ -30,9 +47,9 @@ export const editMovie = async(req, res) => {
     res.json("ok");
 }
 
-export const deleteMovie = async(req, res) => {
+export const deleteCandidate = async(req, res) => {
     const { id } = req.body;
-    await db.run('DELETE FROM movies WHERE id=?', [id]);
+    await db.run('DELETE FROM candidatos WHERE id=?', [id]);
     res.json("ok");
 }
 
@@ -62,21 +79,5 @@ export const login = (req, res) => {
   }else{
     res.status(401).json({ message: 'Credenciales inválidas' });
   }
-
-
-  // db.get('SELECT * FROM users WHERE username = ? AND password = ?',[username, password],
-
-  //   (err, row) => {
-  //     if (err) {
-  //       console.error('Error al consultar usuario:', err);
-  //       return res.status(500).json({ message: 'Error en el servidor' });
-  //     }
-  //     if (row) {
-  //       res.json('ok');
-  //     } else {
-  //       res.status(401).json({ message: 'Credenciales inválidas' });
-  //     }
-  //   }
-  // );
 };
 
