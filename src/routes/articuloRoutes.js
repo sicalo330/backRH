@@ -1,13 +1,15 @@
 import { Router } from "express";
-import { getmovies,postMovies,postUser,login,editMovie,deleteMovie } from "../controller/estudianteController";
+import { getCandidate,postMovies,postUser,login,editMovie,deleteMovie,getStudents,createCandidate } from "../controller/estudianteController";
 
 const router = Router()
 
 
-router.get('/getMovies',getmovies);
+router.get('/getCandidate',getCandidate);
+router.get('/getStudents',getStudents);
 
-router.post('/createUser',postUser);
+// router.post('/createUser',postUser);
 router.post('/createMovie',postMovies);
+router.post('/createCandidate',createCandidate)
 
 router.put("/editMovie",editMovie);
 

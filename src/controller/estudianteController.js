@@ -1,5 +1,5 @@
 // import { connectToDatabase, client } from "../database/database"
-const db = require('../database/database.js'); // 👈 Importa tu conexión
+const db = require('../database/database.js');
 
 //Aquí se tiene que poner los datos de la base de datos nombre de usuario y demás
 //Sé que se debe poner esta información en un .env pero la verdad nunca volveré a usar esos datos en ninguna otra base de datos
@@ -8,8 +8,8 @@ const db = require('../database/database.js'); // 👈 Importa tu conexión
 // connectToDatabase()
 
 //Esta funcion hace un query para traer todos los datos guardados en la tabla estudiantes en la base de datos prueba
-export const getmovies = (req, res) => {
-  db.all('SELECT * FROM movies', [], (err, rows) => {
+export const getCandidate = (req, res) => {
+  db.all('SELECT * FROM candidatos', [], (err, rows) => {
     if (err) {
       console.error('Error en la consulta:', err.message);
       res.status(500).json({ error: err.message });
@@ -17,6 +17,10 @@ export const getmovies = (req, res) => {
       res.json(rows); // Enviar resultados al frontend
     }
   });
+};
+
+export const getStudents = (req, res) => {
+  res.json("conexion a getStudents")
 };
 
 export const editMovie = async(req, res) => {
@@ -33,9 +37,9 @@ export const deleteMovie = async(req, res) => {
 }
 
 
-export const postUser = async(req, res) => {
-    const { username, password } = req.body;
-    await db.run('INSERT INTO users (username, password) VALUES (?, ?)', [username, password]);
+export const createCandidate = async(req, res) => {
+    const { nombre, correo, cargo, experiencia, puntaje, estado} = req.body;
+    await db.run('INSERT INTO candidatos (nombre, correo,cargo,experiencia,puntaje,estado) VALUES (?, ?, ?, ?, ?, ?)', [nombre, correo,cargo,experiencia,puntaje,estado]);
     res.json({ message: 'Usuario creado exitosamente' });
 }
 
@@ -48,20 +52,31 @@ export const postMovies = async(req, res) => {
 
 
 export const login = (req, res) => {
-  const { username, password } = req.body;
+  const { correo, contrasena } = req.body;
 
-  db.get('SELECT * FROM users WHERE username = ? AND password = ?',[username, password],
-    (err, row) => {
-      if (err) {
-        console.error('Error al consultar usuario:', err);
-        return res.status(500).json({ message: 'Error en el servidor' });
-      }
-      if (row) {
-        res.json('ok');
-      } else {
-        res.status(401).json({ message: 'Credenciales inválidas' });
-      }
-    }
-  );
+  let realCorreo = "admin@gmail.com"
+  let realContrasena = "123"
+
+  if(correo == realCorreo && contrasena == realContrasena){
+    res.json("ok")
+  }else{
+    res.status(401).json({ message: 'Credenciales inválidas' });
+  }
+
+
+  // db.get('SELECT * FROM users WHERE username = ? AND password = ?',[username, password],
+
+  //   (err, row) => {
+  //     if (err) {
+  //       console.error('Error al consultar usuario:', err);
+  //       return res.status(500).json({ message: 'Error en el servidor' });
+  //     }
+  //     if (row) {
+  //       res.json('ok');
+  //     } else {
+  //       res.status(401).json({ message: 'Credenciales inválidas' });
+  //     }
+  //   }
+  // );
 };
 

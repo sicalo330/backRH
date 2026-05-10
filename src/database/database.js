@@ -9,6 +9,12 @@ const db = new sqlite3.Database('./database.db', (err) => {
   }
 });
 
+// db.prepare(`
+//     DELETE FROM candidatos WHERE id = 2`
+//   ).run();
+
+// console.log('Tabla creadas');
+
 // Crear tablas si no existen
 // db.run(`DELETE FROM movies where id=1`);
 // db.run(`DROP TABLE users`);
